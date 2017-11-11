@@ -9,5 +9,5 @@ from django.http import HttpResponse
 
 
 class Home_page(TemplateView):
-
+    
     template_name = 'index.html'
