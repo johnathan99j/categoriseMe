@@ -1,11 +1,13 @@
-# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.views.generic import TemplateView
 from django.shortcuts import render
+import os
 
 # Create your views here.
 
 from django.http import HttpResponse
 
-def index(request):
-    return HttpResponse("Hello, my dear team-mates. I hope you enjoyed your curry.")
+
+class Home_page(TemplateView):
+
+    template_name = 'index.html'
