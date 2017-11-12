@@ -1,5 +1,6 @@
 import nltk
 from nltk.classify import NaiveBayesClassifier
+from nltk.classify.util import accuracy
 
 def format_sentence(sent):
     return({word: True for word in nltk.word_tokenize(sent)})
@@ -31,5 +32,9 @@ classifier = NaiveBayesClassifier.train(training)
 
 userInput = "Needless to say, I wasted my money"
 classifier.show_most_informative_features()
-print(classifier.classify(format_sentence(userInput)))
 
+# it says the sentence is positive or negative
+classifier.classify(format_sentence(userInput))
+
+# tells the accuracy
+accuracy(classifier, test)
