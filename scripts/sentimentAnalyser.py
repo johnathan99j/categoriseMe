@@ -1,6 +1,5 @@
 import nltk
 from nltk.classify import NaiveBayesClassifier
-from nltk.classify.util import accuracy
 import sys
 
 
@@ -39,7 +38,6 @@ def analyse(userInput):
 
     # building training data
     training = positive[:int((.8)*len(positive))] + negative[:int((.8)*len(negative))]
-    test = positive[int((.8)*len(positive)):] + negative[int((.8)*len(negative)):]
 
     classifier = NaiveBayesClassifier.train(training)
 
@@ -47,9 +45,6 @@ def analyse(userInput):
 
     # it says the sentence is positive or negative
     print(classifier.classify(format_sentence(userInput)))
-
-    # tells the accuracy
-    print(accuracy(classifier, test) * 100)
 
 
 if __name__ == "__main__":
