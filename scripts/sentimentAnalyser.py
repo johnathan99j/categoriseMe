@@ -11,30 +11,30 @@ def trim_line(line):
 def check_sentiment(line):
     return (line[-1])
 
-# get extract teh positive and negative data
-positive = []
-negative = []
-with open("./amazon_cells_labelled.txt", "r") as file:
-    for line in file: 
-        line = trim_line(line)
-        sentiment = check_sentiment(line)
-        line = line[:-1]
-        if sentiment == "1":
-            positive.append([format_sentence(line), 'pos'])
-        else:
-            negative.append([format_sentence(line), 'neg'])
+def analyse(userInput):
+    # get extract teh positive and negative data
+    positive = []
+    negative = []
+    with open("./amazon_cells_labelled.txt", "r") as file:
+        for line in file: 
+            line = trim_line(line)
+            sentiment = check_sentiment(line)
+            line = line[:-1]
+            if sentiment == "1":
+                positive.append([format_sentence(line), 'pos'])
+            else:
+                negative.append([format_sentence(line), 'neg'])
 
-# building training data
-training = positive[:int((.8)*len(positive))] + negative[:int((.8)*len(negative))]
-test = positive[int((.8)*len(positive)):] + negative[int((.8)*len(negative)):]
+    # building training data
+    training = positive[:int((.8)*len(positive))] + negative[:int((.8)*len(negative))]
+    test = positive[int((.8)*len(positive)):] + negative[int((.8)*len(negative)):]
 
-classifier = NaiveBayesClassifier.train(training)
+    classifier = NaiveBayesClassifier.train(training)
+    
+    # classifier.show_most_informative_features()
 
-userInput = "Needless to say, I wasted my money"
-classifier.show_most_informative_features()
+    # it says the sentence is positive or negative
+    print(classifier.classify(format_sentence(userInput)))
 
-# it says the sentence is positive or negative
-classifier.classify(format_sentence(userInput))
-
-# tells the accuracy
-accuracy(classifier, test)
+    # tells the accuracy
+    print(accuracy(classifier, test))
