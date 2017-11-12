@@ -14,7 +14,8 @@ def index():
 def handle_data():
     # os.system("./scripts/sentimentAnalyser.py " + str(request.data))
     message = {}
-    message['text'] = str(request.POST.get("inputText"))
+    # message['text'] = str(request.POST.get("inputText"))
+    message['text'] = str(request.form['inputText'])
     return render_template('index.html', message=message)
 
 
